@@ -1,0 +1,53 @@
+{
+    "name": "moto-bima-chatbot",
+    "version": "0.0.1",
+    "description": "A product demo for AI in motor vehicle insurance",
+    "keywords": [
+        "motor-insurance",
+        "AI",
+        "chatbot"
+    ],
+    "homepage": "https://github.com/coduori/moto-bima-chatbot#readme",
+    "bugs": {
+        "url": "https://github.com/coduori/moto-bima-chatbot/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/coduori/moto-bima-chatbot.git"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "author": "Oduori Oranga <oduori.oranga@gmail.com>",
+    "type": "module",
+    "main": "src/index.mjs",
+    "scripts": {
+        "start": "node src/index.mjs",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "snyk:scan": "dotenv snyk test --all-projects",
+        "security": "npm run snyk:scan"
+    },
+    "dependencies": {
+        "@google-cloud/documentai": "^9.5.0",
+        "@huggingface/inference": "^4.13.0",
+        "dotenv": "^17.2.3",
+        "file-type": "^21.0.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.38.0",
+        "eslint": "^9.38.0",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-import": "^2.32.0",
+        "eslint-plugin-n": "^17.23.1",
+        "eslint-plugin-promise": "^7.2.1",
+        "eslint-plugin-security": "^3.0.1",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-sonarjs": "^3.0.5",
+        "eslint-plugin-unicorn": "^62.0.0",
+        "globals": "^16.4.0",
+        "prettier": "^3.6.2",
+        "snyk": "^1.1300.2"
+    }
+}

@@ -1,14 +1,48 @@
-import { askQuestion } from './utils/ask-question.mjs';
-import { generateLogbookContext } from './utils/generate-logbook-context.mjs';
-import { logbookOcr } from './utils/logbook-ocr.mjs';
+import { config } from 'dotenv';
 
-const filePath = './samples/sample-logbook.pdf';
-const question = "What is my vehicle's registration number?";
+import { askGemini } from './utils/ask-gemini.mjs';
+import { modelConfigs } from './utils/model-configs.mjs';
+import {
+    callFunction,
+    getFunctionCall,
+    shouldInvokeFunction,
+} from './utils/should-invoke-function.mjs';
 
-const logbookData = await logbookOcr({ filePath });
+config();
 
-const logbookContext = generateLogbookContext(logbookData);
+const userQuestion = 'Please cancel my certificate for this period';
 
-const answer = await askQuestion(question, logbookContext);
+const response = await askGemini({
+    model: process.env.CHATBOT_MODEL,
+    contents: userQuestion,
+    config: modelConfigs,
+});
+
+const contents = [{ role: 'user', parts: [{ text: userQuestion }] }];
+
+const shouldCallFunction = shouldInvokeFunction(response);
+
+if (shouldCallFunction) {
+    const { functionArguments: args, functionName: name } = getFunctionCall(response);
+    contents.push({ role: 'model', parts: [{ functionCall: { name, args } }] });
+    const result = await callFunction(response);
+    contents.push({
+        role: 'user',
+        parts: [
+            {
+                functionResponse: {
+                    name,
+                    response: result,
+                },
+            },
+        ],
+    });
+}
+
+const finalResponse = await askGemini({
+    model: process.env.CHATBOT_MODEL,
+    contents,
+});
+
 // eslint-disable-next-line no-console
-console.log(answer);
+console.log('Final answer:', finalResponse.text);

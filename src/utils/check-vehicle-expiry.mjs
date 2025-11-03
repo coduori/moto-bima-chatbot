@@ -1,7 +1,14 @@
 import { sendHttpRequest } from './http-handler.mjs';
 
-const checkVehicleExpiry = (registrationNumber) => {
+const checkVehicleExpiry = ({ registrationNumber }) => {
     return sendHttpRequest('POST', '/check-vehicle-expiry', { registrationNumber });
 };
 
-export { checkVehicleExpiry };
+const cancelInsuranceCover = ({ certificateNumber, cancellationReason }) => {
+    return sendHttpRequest('POST', '/cancel-insurance-cover', {
+        certificateNumber,
+        cancellationReason,
+    });
+};
+
+export { cancelInsuranceCover, checkVehicleExpiry };

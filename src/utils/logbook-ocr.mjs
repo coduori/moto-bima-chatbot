@@ -1,9 +1,9 @@
 import { DocumentProcessorServiceClient } from '@google-cloud/documentai';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
 import { fileToBase64 } from './file-to-base-64.mjs';
 
-dotenv.config();
+config();
 
 const logbookOcr = async ({
     filePath,

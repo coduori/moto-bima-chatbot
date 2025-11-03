@@ -12,10 +12,16 @@ const sendHttpRequest = async (method, endpoint, data) => {
             body: JSON.stringify(data),
             headers,
         });
+        const result = await response.json();
 
-        return response.json();
+        // eslint-disable-next-line no-console
+        console.log(`request to API:: ${JSON.stringify(data)}`);
+
+        // eslint-disable-next-line no-console
+        console.log(`response from API:: ${JSON.stringify(result)}`);
+        return result;
     } catch (error) {
-        throw new Error(`DMVIC Request error: ${error}`);
+        throw new Error(`API Request error: ${error}`);
     }
 };
 

@@ -10,7 +10,7 @@ import {
 
 config();
 
-const userQuestion = 'Please cancel my certificate for this period';
+const userQuestion = 'When does my vehicle expire?';
 
 const response = await askGemini({
     model: process.env.CHATBOT_MODEL,
@@ -47,4 +47,4 @@ const finalResponse = await askGemini({
 // eslint-disable-next-line no-console
 console.log('Final answer:', finalResponse.text);
 // eslint-disable-next-line no-console
-console.log('Final answer:', finalResponse?.candidates[0].content);
+console.log('Final answer:', finalResponse?.candidates[0]);

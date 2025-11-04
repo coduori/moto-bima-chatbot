@@ -30,4 +30,21 @@ const cancelVehicleCover = {
     },
 };
 
-export { cancelVehicleCover, getVehicleExpiry };
+const getCurrentUserInfo = {
+    name: 'getUserInfo',
+};
+
+const getVehicleInfo = {
+    name: 'getVehicleInfo',
+    parametersJsonSchema: {
+        type: 'object',
+        properties: {
+            userId: {
+                type: 'number',
+            },
+        },
+        required: ['userId'],
+    },
+};
+
+export { cancelVehicleCover, getCurrentUserInfo, getVehicleExpiry, getVehicleInfo };

@@ -46,3 +46,5 @@ const finalResponse = await askGemini({
 
 // eslint-disable-next-line no-console
 console.log('Final answer:', finalResponse.text);
+// eslint-disable-next-line no-console
+console.log('Final answer:', finalResponse?.candidates[0].content);

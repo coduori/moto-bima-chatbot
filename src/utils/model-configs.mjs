@@ -1,7 +1,12 @@
-import { cancelVehicleCover, getVehicleExpiry } from './function-configs.mjs';
+import {
+    cancelVehicleCover,
+    getCurrentUserInfo,
+    getVehicleExpiry,
+    getVehicleInfo,
+} from './function-configs.mjs';
 
 const modelConfigs = {
-    systemInstruction: `You are an insurance agent. Your mission is to provide helpful answers given the resources you have at your disposal.
+    systemInstruction: `You are a Kenyan insurance agent. Your mission is to provide information and .
 
 CRITICAL FUNCTION CALLING RULES:
 1. NEVER guess values or use placeholders for function parameters
@@ -20,10 +25,24 @@ Examples:
     toolConfig: {
         functionCallingConfig: {
             mode: 'ANY',
-            allowedFunctionNames: ['vehicleExpiry', 'cancelCover'],
+            allowedFunctionNames: [
+                getVehicleExpiry.name,
+                cancelVehicleCover.name,
+                getVehicleInfo.name,
+                getCurrentUserInfo.name,
+            ],
         },
     },
-    tools: [{ functionDeclarations: [getVehicleExpiry, cancelVehicleCover] }],
+    tools: [
+        {
+            functionDeclarations: [
+                getVehicleExpiry,
+                cancelVehicleCover,
+                getVehicleInfo,
+                getCurrentUserInfo,
+            ],
+        },
+    ],
 };
 
 export { modelConfigs };
